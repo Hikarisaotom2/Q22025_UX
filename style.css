@@ -1,0 +1,65 @@
+/* 
+    JSON: Notación para escribir objetos 
+
+    Objeto {
+    nombre atributo: valor del atributo,
+    }
+
+    Persona 
+     nombre, edad, sexo
+
+     Persona{
+        nombre: "Claudia",
+        edad: 90,
+        sexo: "F",
+     }
+*/
+
+
+/* 
+ 3 diferentes formas de escribir los estilos: 
+    1) ID
+    2) Clases 
+    3) Etiquetas/ Tags 
+*/
+
+/* ID */
+#tituloPrinipal{
+   color:aquamarine; 
+
+}
+
+#titulo1 {
+ color: blueviolet;
+ font-size: 100px;
+ font-weight:900;
+ font-style: italic;
+ border: 10px;
+ border-color: black;
+}
+
+/* Clases */
+.parrafos{
+   color:chocolate;
+   font-style: normal;
+   font-size: 12px;
+   text-align: justify;
+}
+
+/* etiquetas */
+p{
+   color: red;
+   font-size: 32px;
+   text-align: center;
+}
+
+h1{
+   color: aqua;
+   font-size: 150px;
+}
+
+/*
+1) ID 
+2) class
+3) etiquetas
+*/
