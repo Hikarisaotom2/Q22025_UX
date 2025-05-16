@@ -36,7 +36,11 @@ Existen 3 maneras para agregar CSS a nuestros archivos:
   </head>
   <body>
     
-    <h1 id="titulo1"> Titulo h1</h1>
+    <p id="titulo1"> Hola Mundo!</p>
+    <input type="text" class="form-control mb-3 ">
+    <button> Cambiar</button>
+
+    <h1> Titulo h1</h1>
     <h2 style="color:chartreuse; 
     font-size: 24px;">Titulo2</h2>
     <h3 >Titulo3</h3>
@@ -134,6 +138,118 @@ Existen 3 maneras para agregar CSS a nuestros archivos:
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" 
   integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" 
   crossorigin="anonymous"></script>
+
+  <script>
+      console.log("Hola mundo");
+      console.info("Esta es información");
+      console.error("Algo salio mal");
+    
+      // Variables 
+      // JS NO maneja tipado de datos a nivel SINTACTICO.
+      /*
+      -> SINTAXIS  -> COMO ESCRIBIMOS 
+      -> SEMANTICO -> SENTIDO LOGICO DE LO QUE ESCRIBIMOS 
+      */ 
+
+    // var let -> definiri variables (contenedores que pueden cambiar su contenido)
+    // const -> constantes 
+
+    var hola = "Hola";
+    hola = 5;
+    let variableNormal = 5;
+    variableNormal = true;
+    const id = 123456;
+ 
+
+    // funciones
+    /*
+      1) Forma comun 
+      2) Funciones anonimas / funciones flecha / funciones lambda 
+    */ 
+    // nan, null, undefined
+    function calcularIMC(param1, param2){
+      return "hola";
+    }
+
+    function imprimirMensaje(param1){
+      console.log("No retornamos nada");
+      if(param1>5){
+        return "MAYOR A 5";
+      }
+    }
+
+
+    function comparaciones(param1, param2){
+      //  = asignacion 
+      //  == comparacion 
+      // === comparacion del contenido de las variables y su tipo de dato 
+
+      // if("HOLA"){ // verificar si el string hola esta vacio 
+      //   // "hola".isnotEmpty();
+      //   console.log("No esta vacio")
+      // }else{
+      //   console.log("Esta vacio")
+      // }
+      console.log(param1,"==", param2, (param1 == param2));
+      console.log(param1,"===", param2, (param1 === param2));
+    }
+
+    //ARROW FUNCTIONS 
+    function funcionNormal(){
+
+    }
+
+    const funcionFlecha = (numero1) =>{
+      console.log(numero1);
+    }; 
+
+    let funcionArrow = (numero2, numero3) =>{
+      return numero2*numero3;
+    }
+
+    funcionFlecha(5);
+    funcionArrow(5,10);
+
+
+    //Llamados a funciones 
+    comparaciones("5", 5);
+    comparaciones("hola", true);
+    comparaciones([], true);
+    comparaciones(0, true);
+    comparaciones(1, true);
+    comparaciones(90, true);
+    comparaciones("", []);
+    // vacio / no esta vacio 
+  
+    /* Objetos.
+      Trabajan utilizando e formato JSON.
+      No necesitan definicion original 
+      Los atributos se trabajan sobre la marcha.
+    */
+
+    let persona = {
+      edad : 50,
+      nombre: "Juan",
+      carrera: "Sistemas"
+    };
+    
+   console.log(persona);
+   console.log(persona.nombre); // objeto 
+   console.log(persona["nombre"]); // diccionario 
+
+   persona.nombre = "PEDRO PABLO"
+  //  persona["nombre"] = "LEON XIV"
+
+  persona["NOMbre"] = "LEOX XIV";
+  persona.atributoNuevo = 080119901234;
+
+  console.log("OBJETO ACTUALIZADO", persona);
+
+
+
+
+  </script>
+
   </body>
   <footer>
     
