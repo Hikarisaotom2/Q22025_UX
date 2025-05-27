@@ -1,6 +1,6 @@
 import BotonAtomico from "@/components/atoms/boton";
 import MoleculaBotones from "@/components/molecules/moleculaBotones";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 /*
   Componenete funcional.
@@ -25,27 +25,28 @@ export default function Home() {
     }
   }
 
-   /*
-      {
-    const objeto = {
-     nombre:  juan
-     apellido: perez 
-     } 
+    /*
+    1) ejecuta  acciones en cada render. 
+    2) ejecuta una accion en el primer render.
+    3) ejecuta una accion cada que un state/ valor cambie.
+      useEffect(Accion, observando);
+    */
+   //1 todos los renders
+    // useEffect(()=>{
+    //   console.log("ejecutandose en cada render");
+    // });
+    
+    //2 primer render 
+    useEffect(()=>{
+      console.log("Primer render !!!");
+    },[]);
 
-     const objeto2 ={
-     nombre: objeto.nombre
-     apellido: objeto.apellido
-     direccion: "...."
-     }
+    useEffect( ()=>{
+      console.log("Agregamos un elemento a la lista!");
 
-     .-> EJEMPLLO deconstruccion 
-
-      const objeto2 ={
-     ...objeto
-     direccion: "...."
-     }
-      */
+    }, [lista]);
       
+
   return (
     <center>
     <h1>{textoDinamico}</h1>
