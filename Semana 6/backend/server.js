@@ -1,6 +1,10 @@
 const express = require('express');
+const path = require('path');
+const bodyParser = require('body-parser');
 
 const app = express();
+let parser = bodyParser.urlencoded({extended:true});
+app.use(parser);
 const port = 3000;
 
 // callback: funcion que se ejecuta al final de un proceso async
@@ -39,10 +43,68 @@ app.get('/mostrarInfo',(req,res)=>{
     console.log("Procesando solicitud");
     //responder. 
     res.status(200).send(
+        "<H1>holaa mundo</H1>"
+    );
+    }
+);
+
+
+app.post('/registrarUsuario',(req,res)=>{
+    //const exito =  Insert INTO.......;
+    console.log("Solicitud post");
+   /*
+    if(exito){
+     res.status(200).send(
         {
-            mensaje: "Hola desde el backend!"
+            mensaje: "REGISTRO salvado"
+        }
+    );
+    }else{
+     res.status(500).send(
+        {
+            mensaje: "lo sentimos ocurrio un error"
+        }
+    );
+    }
+   */
+
+    res.status(201).send(
+        {
+            mensaje: "todo salio bien",
+            id: "el nuevo id es 123"
+        }
+    );
+    
+    }
+);
+
+app.put('/editarUsuario',(req,res)=>{
+    console.log("actualizar info");
+    //responder. 
+    res.status(203).send(
+        {
+            mensaje: "Actualizacion exitosa!",
+            
         }
     );
     }
 );
 
+app.delete('/eliminarUsuario',(req,res)=>{
+    console.log("eliminar user");
+    //responder. 
+    res.status(204).send(
+        {
+            mensaje: "Eliminado",
+            cantidad_registros_eliminados: 20,
+        }
+    );
+    }
+);
+
+app.get('/home',(req,res)=>{
+    console.log("retornando homepage ", __dirname, __filename);
+    const archivo = path.join(__dirname, 'homepage.html'); 
+    res.status(200).sendFile(archivo);
+    }
+);
