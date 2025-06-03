@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const app = express();
 let parser = bodyParser.urlencoded({extended:true});
 app.use(parser);
-const port = 3000;
+const port = 3001;
 
 // callback: funcion que se ejecuta al final de un proceso async
 app.listen(port,()=>{
@@ -50,8 +50,15 @@ app.get('/mostrarInfo',(req,res)=>{
 
 
 app.post('/registrarUsuario',(req,res)=>{
+
     //const exito =  Insert INTO.......;
     console.log("Solicitud post");
+    // console.log(req);
+    console.log(req.body);
+
+    const usuario = req.body.Usuario;
+    const contrasena = req.body.Contrasena;
+    console.log(usuario,contrasena)
    /*
     if(exito){
      res.status(200).send(
@@ -90,8 +97,9 @@ app.put('/editarUsuario',(req,res)=>{
     }
 );
 
-app.delete('/eliminarUsuario',(req,res)=>{
+app.delete('/eliminarUsuario/:id',(req,res)=>{
     console.log("eliminar user");
+    console.log(req.params.id );
     //responder. 
     res.status(204).send(
         {
@@ -106,5 +114,12 @@ app.get('/home',(req,res)=>{
     console.log("retornando homepage ", __dirname, __filename);
     const archivo = path.join(__dirname, 'homepage.html'); 
     res.status(200).sendFile(archivo);
+    }
+);
+
+
+app.get('/saludar/:saludo',(req,res)=>{
+    console.log(req.params.saludo);
+    res.status(200).send({mensaje: "Hola!"});
     }
 );
