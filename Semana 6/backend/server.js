@@ -118,8 +118,27 @@ app.get('/home',(req,res)=>{
 );
 
 
+app.post('/saludar/:saludo',(req,res)=>{
+    console.log(req.params.saludo);
+    res.status(200).send({mensaje: "Hola!"});
+    }
+);
+
 app.get('/saludar/:saludo',(req,res)=>{
     console.log(req.params.saludo);
     res.status(200).send({mensaje: "Hola!"});
+    }
+);
+
+
+app.get('/infoPrincipal',(req,res)=>{
+    /*
+     solicitud a BDD, imagenes, datos 
+    */
+   console.log("ENVIANDO INFO PRINCIPAL");
+    res.status(200).send({informacion: [
+        {id:123, titulo:"lilo & stitch", },
+        {id:345, titulo:"Destino final 6."},
+    ]});
     }
 );

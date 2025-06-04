@@ -1,7 +1,7 @@
 import BotonAtomico from "@/components/atoms/boton";
 import MoleculaBotones from "@/components/molecules/moleculaBotones";
 import { useEffect, useState } from "react";
-
+import axios from "axios";
 /*
   Componenete funcional.
   Functional componenet
@@ -12,6 +12,7 @@ export default function Home() {
   // const [/*nombre de la variable, nombre de la funcion para actualizar la variable*/] = useState(/*valor inicial de la variable*/);
   const [textoDinamico, setTextoDinamico] = useState("");
   const [lista, setLista] = useState([""]);
+  const url = "http://localhost:3001";
   const actualizar = (event:any) => { setTextoDinamico(event.currentTarget.value)}
   const elseIf = () =>{
 
@@ -38,7 +39,8 @@ export default function Home() {
     
     //2 primer render 
     useEffect(()=>{
-      console.log("Primer render !!!");
+      const resp = axios.get(url+"/infoPrincipal");
+      console.log("RESULTADO",resp);
     },[]);
 
     useEffect( ()=>{
