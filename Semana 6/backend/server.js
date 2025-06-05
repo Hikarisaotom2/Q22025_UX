@@ -1,10 +1,18 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
-
+const cors = require('cors');
 const app = express();
 let parser = bodyParser.urlencoded({extended:true});
+
+var corsOptions = {
+  origin: '*'
+}
+let corsPolicy = cors(corsOptions);
+//Agregando servicios 
 app.use(parser);
+app.use(corsPolicy);
+// app.options("*",corsPolicy);
 const port = 3001;
 
 // callback: funcion que se ejecuta al final de un proceso async
@@ -139,6 +147,8 @@ app.get('/infoPrincipal',(req,res)=>{
     res.status(200).send({informacion: [
         {id:123, titulo:"lilo & stitch", },
         {id:345, titulo:"Destino final 6."},
+        {id:678, titulo:"Misión imposible 6 ."},
+        {id:9999, titulo:"F1."},
     ]});
     }
 );

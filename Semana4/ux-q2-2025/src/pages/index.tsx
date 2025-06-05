@@ -12,6 +12,7 @@ export default function Home() {
   // const [/*nombre de la variable, nombre de la funcion para actualizar la variable*/] = useState(/*valor inicial de la variable*/);
   const [textoDinamico, setTextoDinamico] = useState("");
   const [lista, setLista] = useState([""]);
+  const [listaPeliculas, setListaPeliculas] = useState([{}]);
   const url = "http://localhost:3001";
   const actualizar = (event:any) => { setTextoDinamico(event.currentTarget.value)}
   const elseIf = () =>{
@@ -39,9 +40,19 @@ export default function Home() {
     
     //2 primer render 
     useEffect(()=>{
-      const resp = axios.get(url+"/infoPrincipal");
-      console.log("RESULTADO",resp);
+      ejecutarPromise();
     },[]);
+      /*
+      1) async/await 
+      2) then, catch 
+      */
+
+    const ejecutarPromise = async ()=>{
+      // async/await : metodo (async) y de linea (await)
+      const resp = await axios.get(url+"/infoPrincipal");
+      setListaPeliculas(resp.data.informacion);
+    }
+
 
     useEffect( ()=>{
       console.log("Agregamos un elemento a la lista!");
@@ -74,13 +85,12 @@ export default function Home() {
        lista.map((item)=>{
         return <BotonAtomico  texto={item} color ="rojo" />
       }) // Mapeo != Casteo. 
-      
-      /*
-      for item in lista :
+    }
 
-         funcion(item);
-         
-      */
+    {
+      listaPeliculas.map((item:any)=>{
+        return <BotonAtomico  texto={item.titulo} color ="green" />
+      }) 
     }
     <MoleculaBotones />
     </center>
