@@ -13,7 +13,6 @@ export default function Home() {
   const [textoDinamico, setTextoDinamico] = useState("");
   const [lista, setLista] = useState([""]);
   const [listaPeliculas, setListaPeliculas] = useState([{}]);
-  const url = "http://localhost:3001";
   const actualizar = (event:any) => { setTextoDinamico(event.currentTarget.value)}
   const elseIf = () =>{
 
@@ -38,25 +37,54 @@ export default function Home() {
     //   console.log("ejecutandose en cada render");
     // });
     
-    //2 primer render 
+    //2 primer render  
     useEffect(()=>{
-      ejecutarPromise();
+      ejecutarPromiseThenCatch();
+      // ejecutarPromiseAsyncAwait();
     },[]);
+
       /*
       1) async/await 
       2) then, catch 
       */
 
-    const ejecutarPromise = async ()=>{
+    const ejecutarPromiseAsyncAwait = async ()=>{
       // async/await : metodo (async) y de linea (await)
-      const resp = await axios.get(url+"/infoPrincipal");
+      try{
+      const resp = await axios.get(`${process.env.NEXT_PUBLIC_API_BE}/infoPrincipal`);
       setListaPeliculas(resp.data.informacion);
+      }catch(error){
+        console.error(error);
+      }
+    }
+
+    const ejecutarPromiseThenCatch = () =>{
+      // then, catch : a nivel de instrucción.
+      let data = {
+        Usuario:"Claudia",
+        Contrasena: "Password123!"
+      }
+
+      axios.post(`${process.env.NEXT_PUBLIC_API_BE}/registrarUsuario`,data,{
+        headers :{
+          "Content-Type" : "application/x-www-form-urlencoded"
+        }
+      } )
+      .then((resp)=>{
+        console.log("[!@#] axios se ejecuto con exito");
+        setListaPeliculas(resp.data.informacion);
+      })
+      .catch((error)=>{ 
+        console.log("[!@#]algo salio mal");
+        console.error(error);
+      });
+      console.log("[!@#] este mensaje esta despues del then/catch");
+
     }
 
 
     useEffect( ()=>{
       console.log("Agregamos un elemento a la lista!");
-
     }, [lista]);
       
 
