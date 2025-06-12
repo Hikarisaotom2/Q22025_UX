@@ -1,4 +1,4 @@
-const { MongoClient, ServerApiVersion } = require("mongodb");
+const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
@@ -105,7 +105,7 @@ app.post('/registrarUsuario', async (req, res) => {
         res.status(201).send(
             {
                 mensaje: "Usuario creado",
-                repuesta:response
+                repuesta: response
             }
         );
     } catch (error) {
@@ -120,28 +120,79 @@ app.post('/registrarUsuario', async (req, res) => {
 }
 );
 
-app.put('/editarUsuario', (req, res) => {
-    console.log("actualizar info");
-    //responder. 
-    res.status(203).send(
-        {
-            mensaje: "Actualizacion exitosa!",
+app.put('/editarUsuario', async (req, res) => {
+    try {
 
-        }
-    );
+        const baseDatos = client.db("claseux");
+        const coleccion = baseDatos.collection("alumnos");
+
+        const filter = { username: req.body.username };
+        const updateDocument = {
+            $set: {
+                nuevoCampo: req.body.nuevo,
+                password: req.body.password,
+            },
+        };
+        const response = await coleccion.updateOne(filter, updateDocument);
+
+
+        res.status(200).send({
+            response: response
+        });
+
+    } catch (error) {
+        res.status(500).send({
+            error: error
+        });
+    }
 }
 );
 
-app.delete('/eliminarUsuario/:id', (req, res) => {
-    console.log("eliminar user");
-    console.log(req.params.id);
-    //responder. 
-    res.status(204).send(
-        {
-            mensaje: "Eliminado",
-            cantidad_registros_eliminados: 20,
+app.delete('/eliminarUsuario/:id', async (req, res) => {
+
+    try {
+
+        const baseDatos = client.db("claseux");
+        const coleccion = baseDatos.collection("alumnos");
+        const response = await coleccion.deleteOne({
+            _id: new ObjectId(req.params.id)
+        });
+        if (response.deletedCount === 0) {
+            res.status(400).send({
+                mensaje: "No se encontró ningun documento con ese ID"
+            });
+        } else {
+            res.status(200).send({
+                mensaje: "Documento eliminado con exito!"
+            });
         }
-    );
+
+    } catch (error) {
+        res.status(500).send({
+            error: error
+        });
+    }
+}
+);
+
+app.get('/getInfoUsuarios', async (req, res) => {
+    try {
+
+        const baseDatos = client.db("claseux");
+        const coleccion = baseDatos.collection("alumnos");
+                            // select * from alumnos
+        const response = await coleccion.find({}).toArray();
+
+
+        res.status(200).send({
+            response: response
+        });
+
+    } catch (error) {
+        res.status(500).send({
+            error: error
+        });
+    }
 }
 );
 
